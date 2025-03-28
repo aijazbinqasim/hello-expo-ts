@@ -1,20 +1,30 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React from "react";
+import { Text, SafeAreaView, StyleSheet, ScrollView } from "react-native";
 
-export default function App() {
+export default function App(): React.JSX.Element {
+  const children: React.JSX.Element[] = [];
+
+  for (let i = 0; i <= 40; i++) {
+    children.push(
+      <Text style={styles.text} key={i}>
+        Line: {i}
+      </Text>
+    );
+  }
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <SafeAreaView style={styles.container}>
+      <ScrollView>{children}</ScrollView>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+  },
+  text: {
+    fontSize: 40,
+    textAlign: "center",
   },
 });
