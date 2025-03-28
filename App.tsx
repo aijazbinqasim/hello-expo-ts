@@ -1,20 +1,19 @@
-import React from "react";
-import { Text, SafeAreaView, StyleSheet, ScrollView } from "react-native";
+import { View, Text, StyleSheet, SafeAreaView, FlatList } from "react-native";
+import { items, Item } from "./data/items";
 
-export default function App(): React.JSX.Element {
-  const children: React.JSX.Element[] = [];
-
-  for (let i = 0; i <= 40; i++) {
-    children.push(
-      <Text style={styles.text} key={i}>
-        Line: {i}
-      </Text>
+export default function App() {
+  const renderItem = ({ item }: { item: Item }) => {
+    return (
+      <View style={styles.listItem}>
+        <Text style={styles.listTitle}>{item.name}</Text>
+        <Text style={styles.listTitle}>{item.emoji}</Text>
+      </View>
     );
-  }
+  };
 
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView>{children}</ScrollView>
+      <FlatList style={styles.list} data={items} renderItem={renderItem} />
     </SafeAreaView>
   );
 }
@@ -23,8 +22,16 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-  text: {
+  list: {
+    flex: 0.5,
+    fontSize: 16,
+  },
+  listItem: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    padding: 8,
+  },
+  listTitle: {
     fontSize: 40,
-    textAlign: "center",
   },
 });
